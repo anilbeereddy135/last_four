@@ -5,7 +5,7 @@ import sys
 import random
 import logging
 
-logging.basicConfig(level=logging.DEBUG, format="%(message)s")
+logging.basicConfig(level=logging.DEBUG, format=" %(level)s - %(message)s")
 logger = logging.getLogger()
 
 handler = logging.FileHandler('res.log')
