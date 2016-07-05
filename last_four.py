@@ -1,7 +1,7 @@
 #! /usr/bin/env python2.7
 
 import os
-import math
+import sys
 import random
 import logging
 
@@ -16,10 +16,12 @@ logger.info("Start")
 def scored_on_ball(_batsman):
 	k = random.uniform(0, 1)
 	run = 0
-	for prob in scoring_prob[batsmen_arr[_batsman]]:
-		run += prob/100.0
+	for prob in range(len(scoring_prob[batsmen_arr[_batsman]])):
+		run +=(scoring_prob[batsmen_arr[_batsman]][prob])/100.0 
+		print scoring_prob[batsmen_arr[_batsman]][prob]/100.0
+		print prob
 		if run >= k:
-			return scoring_prob[batsmen_arr[_batsman]].index(prob)
+			return scoring_prob[batsmen_arr[_batsman]][prob]
 
 def over_sim(_over_num, _batsmen_ind):
 	global _on_strike
@@ -62,6 +64,22 @@ def over_sim(_over_num, _batsmen_ind):
 	return 2
 
 if __name__ == "__main__":
+	scoring_prob = {"Kohli": [5, 30, 25, 10, 15, 1, 9, 5], "Sodhi": [10, 40, 20, 5, 10, 1, 4, 10],
+				"Ramurah": [20, 30, 15, 5, 5, 1, 4, 20], "Henra": [30, 25, 5, 0, 5, 1, 4, 30]}
+	batsmen_arr = ["Kohli", "Sodhi", "Ramurah", "Henra"]
+	score_arr_bat = []
+	prob_arr = [0, 0, 0, 0, 0, 0, 0, 0]
+	run_len = 100
+	for i in range(run_len):
+		score_arr_bat.append(scored_on_ball(0))
+	for i in range(8):
+		for item in score_arr_bat:
+			if item == 7:
+				print "There is an out"
+			if item == i:
+				prob_arr[i] += 1.0/run_len
+	print prob_arr
+	sys.exit()
 	for i in range(100):
 		over_total = 4
 		score_rem = 40
