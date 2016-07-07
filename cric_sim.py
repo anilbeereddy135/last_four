@@ -171,6 +171,8 @@ def if_tie():
                         #logging.info("Score: %d\n", score_rem[0])
 	if res[1] > 1:
 		logging.critical("Chasing team has lost the match by %d runs", res[1] - 1)
+	elif res[1] == 1:
+		logging.critical("Excellent! We,ve got a tie")
 	else:
 		logging.critical("Chasing team has won the match")
 	logging.info("Scores: \nTeam 1\n")
